@@ -1,10 +1,12 @@
 {
     "family": "minecraft-task",
-    "networkMode": "awsvpc",
+    "networkMode": "bridge",
     "containerDefinitions": [
         {
             "name": "minecraft-server",
             "image": "548484840290.dkr.ecr.us-east-2.amazonaws.com/visitor-counter-app:latest",
+            "cpu": 1024,
+            "memory": 2048,
             "portMappings": [
                 {
                     "containerPort": 25565,
@@ -18,7 +20,5 @@
             ]
         }
     ],
-    "requiresCompatibilities": ["FARGATE"],
-    "cpu": "1024",
-    "memory": "2048"
+    "requiresCompatibilities": ["EC2"]
 }

@@ -6,14 +6,13 @@ CLUSTER_NAME="minecraft-cluster"
 TASK_FAMILY="minecraft-task"
 
 echo "Step 1: Registering Task Definition..."
-aws ecs register-task-definition --cli-input-json file://fargate-task.json --region $REGION
+aws ecs register-task-definition --cli-input-json file://task-definition.json --region $REGION
 
-echo "Step 2: Launching Task on Fargate..."
+echo "Step 2: Launching Task on EC2 Instance..."
 aws ecs run-task \
     --cluster $CLUSTER_NAME \
-    --launch-type FARGATE \
+    --launch-type EC2 \
     --task-definition $TASK_FAMILY \
-    --network-configuration "awsvpcConfiguration={subnets=[YOUR_SUBNET_ID],securityGroups=[YOUR_SG_ID],assignPublicIp=ENABLED}" \
     --region $REGION
 
 echo "Deployment initiated."
