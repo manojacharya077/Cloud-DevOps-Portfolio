@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  db:
+    image: "redis:alpine"
+    networks:
+      - visitor-net
+
+  web:
+      build: "."
+      image: "visitor-app:latest"
+      ports:
+        - "5001:80"
+      environment:
+        - REDIS_HOST=db
+      networks:
+        - visitor-net
+      depends_on:
+        - db
+
+networks:
+  visitor-net:

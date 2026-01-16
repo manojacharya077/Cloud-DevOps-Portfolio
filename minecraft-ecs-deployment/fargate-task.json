@@ -1,0 +1,24 @@
+{
+    "family": "minecraft-task",
+    "networkMode": "awsvpc",
+    "containerDefinitions": [
+        {
+            "name": "minecraft-server",
+            "image": "548484840290.dkr.ecr.us-east-2.amazonaws.com/visitor-counter-app:latest",
+            "portMappings": [
+                {
+                    "containerPort": 25565,
+                    "hostPort": 25565,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {"name": "EULA", "value": "TRUE"}
+            ]
+        }
+    ],
+    "requiresCompatibilities": ["FARGATE"],
+    "cpu": "1024",
+    "memory": "2048"
+}
